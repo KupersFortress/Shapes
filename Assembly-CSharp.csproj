@@ -45,12 +45,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Edges.cs" />
-     <Compile Include="Assets\Scripts\EnemyMove.cs" />
-     <Compile Include="Assets\Scripts\EnemyReaction.cs" />
-     <Compile Include="Assets\Scripts\EnemySpawn.cs" />
-     <Compile Include="Assets\Scripts\ObjectControl.cs" />
-     <Compile Include="Assets\Scripts\Pool.cs" />
+     <Compile Include="Assets\Scripts\Enemy\EnemyMove.cs" />
+     <Compile Include="Assets\Scripts\Enemy\EnemyReaction.cs" />
+     <Compile Include="Assets\Scripts\Enemy\EnemySpawn.cs" />
+     <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\Hp.cs" />
+     <Compile Include="Assets\Scripts\Objects\ObjectControl.cs" />
+     <Compile Include="Assets\Scripts\Objects\ObjectReaction.cs" />
+     <Compile Include="Assets\Scripts\System\Edges.cs" />
+     <Compile Include="Assets\Scripts\System\Line.cs" />
+     <Compile Include="Assets\Scripts\System\Pool.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

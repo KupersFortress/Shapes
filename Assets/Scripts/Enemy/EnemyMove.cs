@@ -3,24 +3,24 @@ using System.Collections;
 
 public class EnemyMove : MonoBehaviour
 {
-    [SerializeField]
-    float speed;
+    //static float speed;
     bool leftDirection=true;
 
-	// Use this for initialization
-	void Start ()
+    
+	
+    void Start()
     {
         
-	
-	}
-	
-	// Update is called once per frame
+    }
 	void Update ()
     {
         leftDirection = transform.position.x > 0.0f ? true : false;
         if (leftDirection)
-            transform.Translate(Vector2.left * speed * Time.deltaTime);
+            transform.Translate(Vector2.left * GameController.enemySpeed * Time.deltaTime);
         else
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
+            transform.Translate(Vector2.right * GameController.enemySpeed * Time.deltaTime);
+        
     }
+
+    
 }
