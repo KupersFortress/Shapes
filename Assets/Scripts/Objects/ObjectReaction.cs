@@ -13,7 +13,7 @@ public class ObjectReaction : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (gameObject.tag != other.gameObject.tag)
+        if ((gameObject.tag != other.gameObject.tag)&&(other.gameObject.layer!=gameObject.layer))
         {
             StartCoroutine(Damage());
         }

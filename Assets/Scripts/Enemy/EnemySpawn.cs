@@ -7,22 +7,25 @@ public class EnemySpawn : MonoBehaviour
     public static int destroyedEnemyCount;
     [SerializeField]
     float spawnDelay;
-    [SerializeField]
+    //[SerializeField]
     int enemyCount;
     [SerializeField]
     int maxEnemyCount;
     public Line[] lines;
     public Pool[] pools;
     bool isSpawning;
-    
+    //[SerializeField]
+    //bool moveByCurve;
     int enemyTypeCount;
 
 
     void Start()
     {
+        destroyedEnemyCount = 0;
+        enemyCount = 0;
         enemyTypeCount = pools.Length;
         StartCoroutine(Spawn());
-        enemyCount = 0;
+        
         isSpawning = true;
 
     }
@@ -30,7 +33,7 @@ public class EnemySpawn : MonoBehaviour
     void Update()
     {
         if (destroyedEnemyCount == maxEnemyCount)
-            GameController.gameController.ChangeLevel();
+            MainController.mainController.NextLevel();
     }
 
     IEnumerator Spawn()
@@ -46,7 +49,7 @@ public class EnemySpawn : MonoBehaviour
             else
             {
                 GenerateMultipleEnemies();
-                yield return new WaitForSeconds(spawnDelay + Random.value);
+                yield return new WaitForSeconds(spawnDelay + Random.value/2.0f);
             }
 
         }
@@ -59,11 +62,18 @@ public class EnemySpawn : MonoBehaviour
         enemiesOnLine.Add(j);
 
         int h = (int)Random.Range(0, lines.Length);
-        Vector3 position = Random.value > 0.5 ?
+        bool leftPosition= Random.value > 0.5 ?
+                        true : false;
+        Vector3 position = leftPosition ?
                         lines[h].spawnPositions[0].position : lines[h].spawnPositions[1].position;
-        pools[j].Activate(position, Quaternion.identity);
-        enemyCount++;
+        GameObject obj=(GameObject)pools[j].Activate(position, Quaternion.identity);
 
+        obj.GetComponent<EnemyMove>().leftDirection = !leftPosition;
+        enemyCount++;
+        if (lines[h].curve != null)
+        {
+            obj.GetComponent<EnemyMove>().mgcurves = lines[h].curve;
+        }
         for (int i = 0; i < lines.Length-1; i++)
         {
             if ((i!=h) && (Random.value > 0.5f))
@@ -73,7 +83,11 @@ public class EnemySpawn : MonoBehaviour
                 {
                     position = Random.value > 0.5 ?
                         lines[i].spawnPositions[0].position : lines[i].spawnPositions[1].position;
-                    pools[h].Activate(position, Quaternion.identity);
+                   obj=pools[h].Activate(position, Quaternion.identity);
+                   if (lines[i].curve != null)
+                    {
+                        obj.GetComponent<EnemyMove>().mgcurves = lines[i].curve;
+                    }
                     enemyCount++;
                 }
 
@@ -85,100 +99,3 @@ public class EnemySpawn : MonoBehaviour
 
 }
 
-//public class EnemySpawn : MonoBehaviour
-//{
-//    public static int destroyedEnemyCount;
-//    [SerializeField]
-//    float spawnDelay;
-//    [SerializeField]
-//    int enemyCount;
-//    [SerializeField]
-//    int maxEnemyCount;
-//    public Transform spawnPositionObject;
-//    public Transform[] spawnPositions;
-//    public Pool[] pools;
-//    bool isSpawning;
-//    int spawnPositionCount;
-//    int enemyTypeCount;
-
-
-//	void Start ()
-//    {
-//        enemyTypeCount = pools.Length;
-//        spawnPositionCount = spawnPositionObject.transform.childCount;
-//        spawnPositions = new Transform[spawnPositionCount];
-//        for (int i=0;i< spawnPositionCount; i++)
-//        {
-//            spawnPositions[i] = spawnPositionObject.transform.GetChild(i);
-//        }
-//        StartCoroutine(Spawn());
-//        enemyCount = 0;
-//        isSpawning = true;
-
-//    }
-
-//    void Update()
-//    {
-//        if (destroyedEnemyCount == maxEnemyCount)
-//            GameController.gameController.ChangeLevel();
-//    }
-
-//    IEnumerator Spawn()
-//    {
-//        yield return new WaitForSeconds(1.0f);
-//        while (isSpawning)
-//        {
-//            if (enemyCount >= maxEnemyCount)
-//            {
-//                isSpawning = false;
-//                yield return null;
-//            }
-//            else
-//            {
-//                int i = (int)Random.Range(0, pools.Length);
-//                Vector3 position = Random.value > 0.5 ?
-//                    spawnPositions[0].position : spawnPositions[1].position;
-//                pools[i].Activate(position, Quaternion.identity);
-//                enemyCount++;
-
-//                yield return new WaitForSeconds(spawnDelay + Random.value);
-//            }
-
-//        }
-//    }
-
-//    void GenerateMultipleEnemies()
-//    {
-//        int[] lines = new int[spawnPositionCount / 2];
-//        for (int i = 0; i < spawnPositionCount/2; i++)
-//        {
-
-//        }
-//    }
-
-//    //IEnumerator Spawn()
-//    //   {
-//    //       yield return new WaitForSeconds(1.0f);
-//    //       while (isSpawning)
-//    //       {
-//    //           if (enemyCount >= maxEnemyCount)
-//    //           {
-//    //               isSpawning = false;
-//    //               yield return null;
-//    //           }
-//    //           else
-//    //           {
-//    //               int i = (int)Random.Range(0, pools.Length);
-//    //               Vector3 position = Random.value > 0.5 ?
-//    //                   spawnPositions[0].position : spawnPositions[1].position;
-//    //               pools[i].Activate(position, Quaternion.identity);
-//    //               enemyCount++;
-
-//    //               yield return new WaitForSeconds(spawnDelay + Random.value);
-//    //           }
-
-//    //       }
-
-
-//    //   }
-//}

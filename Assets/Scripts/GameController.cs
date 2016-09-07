@@ -8,56 +8,21 @@ public class GameController : MonoBehaviour
     [SerializeField]
     float baseEnemySpeed;
     public static float enemySpeed;
-    private string currentSceneName;
-    private string nextSceneName;
-    private AsyncOperation resourceUnloadTask;
-    private AsyncOperation sceneLoadTask;
-    private enum SceneState { FirstPart,SecondPart, Count };
-    private SceneState sceneState;
-    private delegate void UpdateDelegate();
-    private UpdateDelegate[] updateDelegates;
-
     int currentLevel;
-
     bool testBool = true;
 
     void Awake()
     {
         gameController = this;
-        currentLevel = SceneManager.GetActiveScene().buildIndex;
-        DontDestroyOnLoad(gameObject);
-        updateDelegates = new UpdateDelegate[(int)SceneState.Count];
-
-        //Set each updateDelegate
-       //updateDelegates[(int)SceneState.Reset] = UpdateSceneReset;
-        //updateDelegates[(int)SceneState.Preload] = UpdateScenePreload;
-
+        enemySpeed = baseEnemySpeed;
     }
 
     void Update()
     {
-        TestFunction();
+        //TestFunction();
     }
     
-    void Start()
-    {
-        enemySpeed = baseEnemySpeed;
-    }
 
-    void  FirstPart()
-    {
-
-    }
-
-    void SecondPart()
-    {
-
-    }
-
-    public static void LoseGame()
-    {
-        SceneManager.LoadScene(0);
-    }
 
     void TestFunction()
     {
@@ -71,11 +36,5 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void ChangeLevel()
-    {
-        if (SceneManager.GetActiveScene().buildIndex != 1)
-            SceneManager.LoadScene(1);
-        //else
-        //    SceneManager.LoadScene(0);
-    }
+    
 }

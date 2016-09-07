@@ -45,6 +45,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\MGCurveEditor\MGCurve.cs" />
+     <Compile Include="Assets\MGCurveEditor\MGMoveCurves.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemyMove.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemyReaction.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemySpawn.cs" />
@@ -52,9 +54,12 @@
      <Compile Include="Assets\Scripts\Hp.cs" />
      <Compile Include="Assets\Scripts\Objects\ObjectControl.cs" />
      <Compile Include="Assets\Scripts\Objects\ObjectReaction.cs" />
+     <Compile Include="Assets\Scripts\System\Action.cs" />
      <Compile Include="Assets\Scripts\System\Edges.cs" />
      <Compile Include="Assets\Scripts\System\Line.cs" />
+     <Compile Include="Assets\Scripts\System\MainController.cs" />
      <Compile Include="Assets\Scripts\System\Pool.cs" />
+     <Compile Include="Assets\Scripts\UI\LvlButton.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
