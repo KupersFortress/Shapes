@@ -6,6 +6,7 @@ public class MainController : MonoBehaviour
 {
 
     public static MainController mainController;
+    public int lvlCount;
     private string currentSceneName;
     private string nextSceneName;
     private AsyncOperation resourceUnloadTask;
@@ -75,16 +76,19 @@ public class MainController : MonoBehaviour
 
     public void NextLevel()
     {
-        string[] level = currentSceneName.Split('_');
+        //string[] level = currentSceneName.Split('_');
+        //string sceneName = SceneManager.GetActiveScene().name;
+        string[] level = SceneManager.GetActiveScene().name.Split('_');
         int result;
         bool lvlvExist = int.TryParse(level[1], out result);
         result++;
-        if (lvlvExist)
+        if ((lvlvExist)&&(result <= lvlCount))
             SwitchScene(level[0]+'_'+result.ToString());
     }
 
     protected void Update()
     {
+        Debug.Log(SceneManager.GetActiveScene().name);
         if (updateDelegates[(int)sceneState] != null)
         {
             updateDelegates[(int)sceneState]();

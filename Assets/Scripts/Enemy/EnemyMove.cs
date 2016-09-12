@@ -66,18 +66,18 @@ public class EnemyMove : MonoBehaviour
     //    //transform.LookAt (dir);
     //}
 
-    void moveStraight()
+    void MoveStraight()
     {
         if (leftDirection)
-            transform.Translate(Vector2.left * GameController.enemySpeed);
+            transform.Translate(Vector2.left * GameController.enemySpeed * Time.fixedDeltaTime);
         else
-            transform.Translate(Vector2.right * GameController.enemySpeed);
+            transform.Translate(Vector2.right * GameController.enemySpeed * Time.fixedDeltaTime);
     }
     void FixedUpdate()
     {
         if (mgcurves != null)
             MoveByCurve();
         else
-            moveStraight();
+            MoveStraight();
     }
 }

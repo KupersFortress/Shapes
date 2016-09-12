@@ -8,7 +8,8 @@ public class EnemyReaction : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
 
-        EnemySpawn.destroyedEnemyCount++;
+        EnemySpawn.enemySpawn.destroyedEnemyCount++;
+        
         pool.Deactivate(gameObject);
         if (gameObject.tag!=other.gameObject.tag)
         {

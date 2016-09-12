@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class EnemySpawn : MonoBehaviour
 {
-    public static int destroyedEnemyCount;
+    public static EnemySpawn enemySpawn;
+    public int destroyedEnemyCount;
     [SerializeField]
     float spawnDelay;
     //[SerializeField]
@@ -16,14 +17,15 @@ public class EnemySpawn : MonoBehaviour
     bool isSpawning;
     //[SerializeField]
     //bool moveByCurve;
-    int enemyTypeCount;
+    //int enemyTypeCount;
 
 
     void Start()
     {
+        enemySpawn = this;
         destroyedEnemyCount = 0;
         enemyCount = 0;
-        enemyTypeCount = pools.Length;
+        //enemyTypeCount = pools.Length;
         StartCoroutine(Spawn());
         
         isSpawning = true;
@@ -32,7 +34,7 @@ public class EnemySpawn : MonoBehaviour
 
     void Update()
     {
-        if (destroyedEnemyCount == maxEnemyCount)
+        if (destroyedEnemyCount >= maxEnemyCount)
             MainController.mainController.NextLevel();
     }
 
@@ -74,7 +76,26 @@ public class EnemySpawn : MonoBehaviour
         {
             obj.GetComponent<EnemyMove>().mgcurves = lines[h].curve;
         }
-        for (int i = 0; i < lines.Length-1; i++)
+
+        ////сделать второй
+        //j = (int)Random.Range(0, pools.Length);
+        //if (!enemiesOnLine.Contains(j))
+        //{
+        //    enemiesOnLine.Add(j);
+        //    position = leftPosition ?
+        //                lines[h].spawnPositions[1].position : lines[h].spawnPositions[0].position;
+        //    obj = (GameObject)pools[j].Activate(position, Quaternion.identity);
+
+        //    obj.GetComponent<EnemyMove>().leftDirection = leftPosition;
+        //    enemyCount++;
+        //    if (lines[h].curve != null)
+        //    {
+        //        obj.GetComponent<EnemyMove>().mgcurves = lines[h].curve;
+        //    }
+        //}
+        
+        
+        for (int i = 0; i < lines.Length; i++)
         {
             if ((i!=h) && (Random.value > 0.5f))
             {
