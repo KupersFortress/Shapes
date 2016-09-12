@@ -99,20 +99,20 @@ public class EnemySpawn : MonoBehaviour
         {
             if ((i!=h) && (Random.value > 0.5f))
             {
-                h = (int)Random.Range(0, pools.Length);
-                if (!enemiesOnLine.Contains(h))
+                int l = (int)Random.Range(0, pools.Length);
+
+                if (!enemiesOnLine.Contains(l))
                 {
+                    enemiesOnLine.Add(l);
                     position = Random.value > 0.5 ?
                         lines[i].spawnPositions[0].position : lines[i].spawnPositions[1].position;
-                   obj=pools[h].Activate(position, Quaternion.identity);
-                   if (lines[i].curve != null)
+                    obj = pools[h].Activate(position, Quaternion.identity);
+                    if (lines[i].curve != null)
                     {
                         obj.GetComponent<EnemyMove>().mgcurves = lines[i].curve;
                     }
                     enemyCount++;
                 }
-
-                
             }
         }
     }
