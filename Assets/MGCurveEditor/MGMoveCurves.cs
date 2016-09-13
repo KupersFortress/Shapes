@@ -14,7 +14,7 @@ public class MGMoveCurves: MonoBehaviour {
 		Vector3 position = mgcurves.GetPoint(1f-progress);
 		transform.localPosition = position;
 
-		Vector3 dir = position + mgcurves.GetDirection (progress);
+		//Vector3 dir = position + mgcurves.GetDirection (progress);
 		//transform.LookAt (dir);
 	}
 }

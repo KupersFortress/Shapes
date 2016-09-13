@@ -3,22 +3,27 @@ using System.Collections;
 
 public class ObjectControl : MonoBehaviour
 {
+    public static ObjectControl objectControl;
     public GameObject redObject;
     public GameObject blueObject;
 
     //float leftPosition;
     //float rightPosition;
-    Vector2 redBasePosition;
-    Vector2 blueBasePosition;
+    public Vector2 leftPosition;
+    public Vector2 rightPosition;
     bool isMoving;
     bool blueMoveRight;
 
+    void Awake()
+    {
+        objectControl = this;
+    }
 
     void Start()
     {
         blueMoveRight = true;
-        redBasePosition = redObject.transform.position;
-        blueBasePosition = blueObject.transform.position;
+        leftPosition = redObject.transform.position;
+        rightPosition = blueObject.transform.position;
     }
 
     void Update()
@@ -44,37 +49,21 @@ public class ObjectControl : MonoBehaviour
         //двигаем синий объект
         if (blueMoveRight)
         {
-            Vector2 x = Vector2.Lerp(blueObject.transform.position, blueBasePosition, 0.2f);
+            Vector2 x = Vector2.Lerp(blueObject.transform.position, rightPosition, 0.2f);
             blueObject.transform.position = x;
             redObject.transform.position = -x;
-            if ((x-blueBasePosition).magnitude < 0.1f)
+            if ((x-rightPosition).magnitude < 0.1f)
                 isMoving = false;
         }
         else
         {
-            Vector2 x = Vector2.Lerp(blueObject.transform.position, redBasePosition, 0.2f);
+            Vector2 x = Vector2.Lerp(blueObject.transform.position, leftPosition, 0.2f);
             blueObject.transform.position = x;
             redObject.transform.position = -x;
-            if ((x - redBasePosition).magnitude < 0.1f)
+            if ((x - leftPosition).magnitude < 0.1f)
                 isMoving = false;
         }
 
-        //if (blueMoveRight)
-        //{
-        //    float x = Mathf.Lerp(blueObject.transform.position.x, rightPosition, 0.2f);
-        //    blueObject.transform.position = new Vector2(x, transform.position.y);
-        //    redObject.transform.position = new Vector2(-x, transform.position.y);
-        //    if (Mathf.Abs(x - rightPosition) < 0.01f)
-        //        isMoving = false;
-        //}
-        //else
-        //{
-        //    float x = Mathf.Lerp(blueObject.transform.position.x, leftPosition, 0.2f);
-        //    blueObject.transform.position = new Vector2(x, transform.position.y);
-        //    redObject.transform.position = new Vector2(-x, transform.position.y);
-        //    if (Mathf.Abs(x - leftPosition) < 0.01f)
-        //        isMoving = false;
-        //}
 
      
     }

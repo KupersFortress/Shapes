@@ -88,7 +88,7 @@ public class MainController : MonoBehaviour
 
     protected void Update()
     {
-        Debug.Log(SceneManager.GetActiveScene().name);
+        //Debug.Log(SceneManager.GetActiveScene().name);
         if (updateDelegates[(int)sceneState] != null)
         {
             updateDelegates[(int)sceneState]();

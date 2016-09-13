@@ -37,41 +37,22 @@ public class EnemyMove : MonoBehaviour
             position = mgcurves.GetPoint(1f-progress);
         transform.localPosition = position;
 
-        Vector3 dir = position + mgcurves.GetDirection(progress);
+        //Vector3 dir = position + mgcurves.GetDirection(progress);
         //transform.LookAt (dir);
     }
 
-    //void moveStraight()
-    //{
-    //    if (leftDirection)
-    //        transform.Translate(Vector2.left * GameController.enemySpeed * Time.deltaTime);
-    //    else
-    //        transform.Translate(Vector2.right * GameController.enemySpeed * Time.deltaTime);
-    //}
-    //void MoveByCurve()
-    //{
-    //    progress += Time.deltaTime / duration;
-    //    if ((progress > 1f) || (progress < 0.0f))
-    //    {
-    //        progress = 0;
-    //    }
-    //    Vector3 position;
-    //    if (leftDirection)
-    //        position = mgcurves.GetPoint(progress);
-    //    else
-    //        position = mgcurves.GetPoint(1f - progress);
-    //    transform.localPosition = position;
-
-    //    Vector3 dir = position + mgcurves.GetDirection(progress);
-    //    //transform.LookAt (dir);
-    //}
-
     void MoveStraight()
     {
+        //if (leftDirection)
+        //    transform.Translate(Vector2.left * GameController.enemySpeed * Time.fixedDeltaTime);
+        //else
+        //    transform.Translate(Vector2.right * GameController.enemySpeed * Time.fixedDeltaTime);
         if (leftDirection)
-            transform.Translate(Vector2.left * GameController.enemySpeed * Time.fixedDeltaTime);
+            transform.Translate(((Vector3)ObjectControl.objectControl.rightPosition-transform.position).normalized * 
+                GameController.enemySpeed * Time.fixedDeltaTime);
         else
-            transform.Translate(Vector2.right * GameController.enemySpeed * Time.fixedDeltaTime);
+            transform.Translate(((Vector3)ObjectControl.objectControl.leftPosition-transform.position).normalized *
+                GameController.enemySpeed * Time.fixedDeltaTime);
     }
     void FixedUpdate()
     {

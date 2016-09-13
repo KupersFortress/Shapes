@@ -15,6 +15,7 @@ public class EnemySpawn : MonoBehaviour
     public Line[] lines;
     public Pool[] pools;
     bool isSpawning;
+    //public List<int> enemiesOnLine;
     //[SerializeField]
     //bool moveByCurve;
     //int enemyTypeCount;
@@ -60,9 +61,10 @@ public class EnemySpawn : MonoBehaviour
     void GenerateMultipleEnemies()
     {
         List<int> enemiesOnLine = new List<int>();
+        //List<int> enemiesOnLine = new List<int>();
         int j = (int)Random.Range(0, pools.Length);
         enemiesOnLine.Add(j);
-
+        //print(enemiesOnLine[0]);
         int h = (int)Random.Range(0, lines.Length);
         bool leftPosition= Random.value > 0.5 ?
                         true : false;
@@ -76,37 +78,31 @@ public class EnemySpawn : MonoBehaviour
         {
             obj.GetComponent<EnemyMove>().mgcurves = lines[h].curve;
         }
-
-        ////сделать второй
-        //j = (int)Random.Range(0, pools.Length);
-        //if (!enemiesOnLine.Contains(j))
-        //{
-        //    enemiesOnLine.Add(j);
-        //    position = leftPosition ?
-        //                lines[h].spawnPositions[1].position : lines[h].spawnPositions[0].position;
-        //    obj = (GameObject)pools[j].Activate(position, Quaternion.identity);
-
-        //    obj.GetComponent<EnemyMove>().leftDirection = leftPosition;
-        //    enemyCount++;
-        //    if (lines[h].curve != null)
-        //    {
-        //        obj.GetComponent<EnemyMove>().mgcurves = lines[h].curve;
-        //    }
-        //}
-        
         
         for (int i = 0; i < lines.Length; i++)
         {
-            if ((i!=h) && (Random.value > 0.5f))
+            if  (Random.value > 0.2f)
             {
                 int l = (int)Random.Range(0, pools.Length);
 
                 if (!enemiesOnLine.Contains(l))
+                    
                 {
+                    //print(l);
+                    //print(enemiesOnLine.Contains(l));
                     enemiesOnLine.Add(l);
-                    position = Random.value > 0.5 ?
-                        lines[i].spawnPositions[0].position : lines[i].spawnPositions[1].position;
-                    obj = pools[h].Activate(position, Quaternion.identity);
+                    if (i != h)
+                    {
+                        position = Random.value > 0.5 ?
+                            lines[i].spawnPositions[0].position : lines[i].spawnPositions[1].position;
+                    }
+                    else
+                    {
+                        position = leftPosition ?
+                            lines[h].spawnPositions[1].position : lines[h].spawnPositions[0].position;
+                    }
+                    obj = pools[l].Activate(position, Quaternion.identity);
+                    //Debug.Log(enemiesOnLine);
                     if (lines[i].curve != null)
                     {
                         obj.GetComponent<EnemyMove>().mgcurves = lines[i].curve;
@@ -119,4 +115,19 @@ public class EnemySpawn : MonoBehaviour
 
 
 }
+////сделать второй
+//j = (int)Random.Range(0, pools.Length);
+//if (!enemiesOnLine.Contains(j))
+//{
+//    enemiesOnLine.Add(j);
+//    position = leftPosition ?
+//                lines[h].spawnPositions[1].position : lines[h].spawnPositions[0].position;
+//    obj = (GameObject)pools[j].Activate(position, Quaternion.identity);
 
+//    obj.GetComponent<EnemyMove>().leftDirection = leftPosition;
+//    enemyCount++;
+//    if (lines[h].curve != null)
+//    {
+//        obj.GetComponent<EnemyMove>().mgcurves = lines[h].curve;
+//    }
+//}
