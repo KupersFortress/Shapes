@@ -4,10 +4,11 @@ using System.Collections;
 public class EnemyMove : MonoBehaviour
 {
     //static float speed;
-    public bool leftDirection = true;
+    public bool leftDirection;
     public MGCurve mgcurves;
-    public float duration;
+    //public float duration;
     private float progress;
+    //Vector3 position;
 
     //void Update()
     //{
@@ -16,7 +17,10 @@ public class EnemyMove : MonoBehaviour
     //    else
     //        moveStraight();
     //}
-
+    void Start()
+    {
+        
+    }
     void OnEnable()
     {
         progress = 0;
@@ -25,8 +29,8 @@ public class EnemyMove : MonoBehaviour
 
     void MoveByCurve()
     {
-        progress += Time.deltaTime / duration;
-        if ((progress > 1f)||(progress<0.0f))
+        progress += 0.01f * Time.deltaTime*GameController.enemySpeed;
+        if ((progress > 1f) || (progress < 0.0f))
         {
             progress = 0;
         }
@@ -34,15 +38,32 @@ public class EnemyMove : MonoBehaviour
         if (leftDirection)
             position = mgcurves.GetPoint(progress);
         else
-            position = mgcurves.GetPoint(1f-progress);
+            position = mgcurves.GetPoint(1f - progress);
         transform.localPosition = position;
-
-        //Vector3 dir = position + mgcurves.GetDirection(progress);
-        //transform.LookAt (dir);
     }
+
+    //void MoveByCurve()
+    //{
+    //    progress += Time.fixedDeltaTime / duration;
+    //    if ((progress > 1f) || (progress < 0.0f))
+    //    {
+    //        progress = 0;
+    //    }
+    //    Vector3 position;
+    //    if (leftDirection)
+    //        position = mgcurves.GetPoint(progress);
+    //    else
+    //        position = mgcurves.GetPoint(1f - progress);
+    //    print(position);
+    //    transform.localPosition = position;
+
+    //    Vector3 dir = position + mgcurves.GetDirection(progress);
+    //    //transform.LookAt (dir);
+    //}
 
     void MoveStraight()
     {
+        print("moveStraight");
         //if (leftDirection)
         //    transform.Translate(Vector2.left * GameController.enemySpeed * Time.fixedDeltaTime);
         //else
@@ -54,11 +75,11 @@ public class EnemyMove : MonoBehaviour
             transform.Translate(((Vector3)ObjectControl.objectControl.leftPosition-transform.position).normalized *
                 GameController.enemySpeed * Time.fixedDeltaTime);
     }
-    void FixedUpdate()
+    void Update()
     {
-        if (mgcurves != null)
+       //if (mgcurves != null)
             MoveByCurve();
-        else
-            MoveStraight();
+        //else
+            //MoveStraight();
     }
 }

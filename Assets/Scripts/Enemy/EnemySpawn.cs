@@ -72,36 +72,46 @@ public class EnemySpawn : MonoBehaviour
                         lines[h].spawnPositions[0].position : lines[h].spawnPositions[1].position;
         GameObject obj=(GameObject)pools[j].Activate(position, Quaternion.identity);
 
-        obj.GetComponent<EnemyMove>().leftDirection = !leftPosition;
+        
+            obj.GetComponent<EnemyMove>().leftDirection = !leftPosition;
+       
+
         enemyCount++;
         if (lines[h].curve != null)
         {
             obj.GetComponent<EnemyMove>().mgcurves = lines[h].curve;
         }
-        
+
         for (int i = 0; i < lines.Length; i++)
         {
-            if  (Random.value > 0.2f)
+            if (Random.value > 0.2f)
             {
                 int l = (int)Random.Range(0, pools.Length);
 
                 if (!enemiesOnLine.Contains(l))
-                    
+
                 {
                     //print(l);
                     //print(enemiesOnLine.Contains(l));
                     enemiesOnLine.Add(l);
+                    obj = pools[l].Activate(position, Quaternion.identity);
                     if (i != h)
                     {
-                        position = Random.value > 0.5 ?
+                        leftPosition = Random.value > 0.5 ? true : false;
+                        position = leftPosition ?
                             lines[i].spawnPositions[0].position : lines[i].spawnPositions[1].position;
+                        obj.GetComponent<EnemyMove>().leftDirection = !leftPosition;
                     }
                     else
                     {
+                        leftPosition = !leftPosition;
                         position = leftPosition ?
-                            lines[h].spawnPositions[1].position : lines[h].spawnPositions[0].position;
+                            lines[h].spawnPositions[0].position : lines[h].spawnPositions[1].position;
+                        obj.GetComponent<EnemyMove>().leftDirection = !leftPosition;
                     }
-                    obj = pools[l].Activate(position, Quaternion.identity);
+                    obj.transform.position = position;
+
+
                     //Debug.Log(enemiesOnLine);
                     if (lines[i].curve != null)
                     {

@@ -1,4 +1,13 @@
 sceneSetups:
+- path: Assets/Scenes/MainMenu.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Scenes/MainMenu.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Scenes/MainMenu.unity
+  isLoaded: 0
+  isActive: 0
 - path: Assets/Scenes/Lvl_4.unity
   isLoaded: 1
   isActive: 1

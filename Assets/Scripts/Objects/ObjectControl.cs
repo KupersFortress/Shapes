@@ -28,6 +28,13 @@ public class ObjectControl : MonoBehaviour
 
     void Update()
     {
+        //убрать потом
+        if (Input.GetMouseButtonDown(0))
+        {
+                isMoving = true;
+                blueMoveRight = !blueMoveRight;
+        }
+
         if (Input.touchCount > 0)
         {
             Touch myTouch;
