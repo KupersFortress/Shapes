@@ -6,10 +6,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{2E7ADE4E-E837-753E-849E-C9678DB96205}</ProjectGuid>
+    <ProjectGuid>{531BF175-5C4B-B246-FC43-6D60A6251E83}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>Assets</BaseDirectory>
@@ -45,23 +45,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\MGCurveEditor\MGCurve.cs" />
-     <Compile Include="Assets\MGCurveEditor\MGMoveCurves.cs" />
-     <Compile Include="Assets\Scripts\Bezier.cs" />
-     <Compile Include="Assets\Scripts\Enemy\EnemyMove.cs" />
-     <Compile Include="Assets\Scripts\Enemy\EnemyReaction.cs" />
-     <Compile Include="Assets\Scripts\Enemy\EnemySpawn.cs" />
-     <Compile Include="Assets\Scripts\GameController.cs" />
-     <Compile Include="Assets\Scripts\Hp.cs" />
-     <Compile Include="Assets\Scripts\Objects\ObjectControl.cs" />
-     <Compile Include="Assets\Scripts\Objects\ObjectReaction.cs" />
-     <Compile Include="Assets\Scripts\RotateCamera.cs" />
-     <Compile Include="Assets\Scripts\System\Action.cs" />
-     <Compile Include="Assets\Scripts\System\Edges.cs" />
-     <Compile Include="Assets\Scripts\System\Line.cs" />
-     <Compile Include="Assets\Scripts\System\MainController.cs" />
-     <Compile Include="Assets\Scripts\System\Pool.cs" />
-     <Compile Include="Assets\Scripts\UI\LvlButton.cs" />
+     <Compile Include="Assets\Plugins\Pixelplacement\iTween\Sample\MoveSample.cs" />
+     <Compile Include="Assets\Plugins\Pixelplacement\iTween\Sample\RotateSample.cs" />
+     <Compile Include="Assets\Plugins\Pixelplacement\iTween\Sample\SampleInfo.cs" />
+     <Compile Include="Assets\Plugins\Pixelplacement\iTween\iTween.cs" />
+     <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

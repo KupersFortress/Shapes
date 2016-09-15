@@ -35,7 +35,7 @@ public class ObjectControl : MonoBehaviour
                 blueMoveRight = !blueMoveRight;
         }
 
-        if (Input.touchCount > 0)
+        if (!(Input.GetMouseButtonDown(0))&&Input.touchCount > 0)
         {
             Touch myTouch;
             myTouch = Input.GetTouch(0);

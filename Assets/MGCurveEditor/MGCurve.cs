@@ -125,7 +125,43 @@ public class MGCurve : MonoBehaviour {
 		};
 
 	}
+    public Vector3[] Resolve(Vector3[] controlPoints, int numPoints)
+    {
+        if (controlPoints.Length < 2)
+        {
+            return controlPoints;
+        }
+
+        Vector3[] result = new Vector3[numPoints];
+
+        for (var i = 0; i < numPoints; i++)
+        {
+            float t = (float)i / (float)(numPoints - 1);
+            result[i] = GetBezierPoint(t, controlPoints, 0, controlPoints.Length);
+        }
+
+        return result;
+    }
+    public  Vector3 GetBezierPoint(float t, Vector3[] controlPoints, int index, int count)
+    {
+        int i;
+        if (t >= 1f)
+        {
+            t = 1f;
+            i = controlPoints.Length - 4;
+        }
+        else
+        {
+            t = Mathf.Clamp01(t) * (controlPoints.Length - 1) / 3;
+            i = (int)t;
+            t -= i;
+            i *= 3;
+        }
+        return transform.TransformPoint(Curve.GetPoint(controlPoints[i],
+            controlPoints[i + 1], controlPoints[i + 2], controlPoints[i + 3], t));
+    }
 }
+
 public static class Curve {
 
 	public static Vector3 GetPoint (Vector3 p0, Vector3 p1, Vector3 p2, float t) {

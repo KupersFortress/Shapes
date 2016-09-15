@@ -74,14 +74,14 @@ public class EnemySpawn : MonoBehaviour
 
         
             obj.GetComponent<EnemyMove>().leftDirection = !leftPosition;
-       
+        
 
         enemyCount++;
         if (lines[h].curve != null)
         {
-            obj.GetComponent<EnemyMove>().mgcurves = lines[h].curve;
+            obj.GetComponent<EnemyMove>().mgCurve = lines[h].curve;
         }
-
+        obj.GetComponent<EnemyMove>().MoveByCurve();
         for (int i = 0; i < lines.Length; i++)
         {
             if (Random.value > 0.2f)
@@ -110,13 +110,14 @@ public class EnemySpawn : MonoBehaviour
                         obj.GetComponent<EnemyMove>().leftDirection = !leftPosition;
                     }
                     obj.transform.position = position;
-
+                    
 
                     //Debug.Log(enemiesOnLine);
                     if (lines[i].curve != null)
                     {
-                        obj.GetComponent<EnemyMove>().mgcurves = lines[i].curve;
+                        obj.GetComponent<EnemyMove>().mgCurve = lines[i].curve;
                     }
+                    obj.GetComponent<EnemyMove>().MoveByCurve();
                     enemyCount++;
                 }
             }
