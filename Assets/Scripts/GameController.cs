@@ -24,17 +24,17 @@ public class GameController : MonoBehaviour
     
 
 
-    void TestFunction()
-    {
-        if (testBool)
-        {
-            if (Time.time > 15.0f)
-            {
-                enemySpeed *= 1.5f;
-                testBool = false;
-            }
-        }
-    }
+    //void TestFunction()
+    //{
+    //    if (testBool)
+    //    {
+    //        if (Time.time > 15.0f)
+    //        {
+    //            enemySpeed *= 1.5f;
+    //            testBool = false;
+    //        }
+    //    }
+    //}
 
     
 }

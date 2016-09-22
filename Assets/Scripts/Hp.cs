@@ -39,7 +39,7 @@ public class Hp : MonoBehaviour
         }
         if (hp<=0)
         {
-            MainController.LoseGame();
+            MainController.mainController.LoseGame();
         }
     }
 }

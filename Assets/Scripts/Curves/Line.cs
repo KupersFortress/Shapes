@@ -15,7 +15,7 @@ public class Line : MonoBehaviour
     [HideInInspector]
     public float totalDistance;
 
-    void Start()
+    void Awake()
     {
         controlPoints = new Vector3[mgCurve.ControlPointCount];
         if (reversed)

@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\Curves\CurveComponent.cs" />
     <Compile Include="Assets\Scripts\Curves\Line.cs" />
     <Compile Include="Assets\Scripts\Curves\MGCurve.cs" />
+    <Compile Include="Assets\Scripts\Curves\PaintCurve.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyMove.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyReaction.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemySpawn.cs" />
@@ -82,7 +83,10 @@
     <Compile Include="Assets\Scripts\Objects\ObjectControl.cs" />
     <Compile Include="Assets\Scripts\Objects\ObjectInfo.cs" />
     <Compile Include="Assets\Scripts\Objects\ObjectReaction.cs" />
+    <Compile Include="Assets\Scripts\Objects\ObjectSounds.cs" />
     <Compile Include="Assets\Scripts\RotateCamera.cs" />
+    <Compile Include="Assets\Scripts\Sound\SoundData.cs" />
+    <Compile Include="Assets\Scripts\Sound\SoundManager.cs" />
     <Compile Include="Assets\Scripts\System\Action.cs" />
     <Compile Include="Assets\Scripts\System\Edges.cs" />
     <Compile Include="Assets\Scripts\System\MainController.cs" />

@@ -90,34 +90,7 @@ public class EnemySpawn : MonoBehaviour
             }
         }
 
-        //int j = (int)Random.Range(0, pools.Length);
-        //int h = (int)Random.Range(0, lines.Length);
-        //Vector3 position = lines[h].controlPoints[0];
-
-        //GameObject obj=(GameObject)pools[j].Activate(position, Quaternion.identity);
-        //obj.GetComponent<EnemyMove>().line = lines[h];
-        //obj.GetComponent<EnemyMove>().MoveByCurve();
-
-        //enemyCount++;
-        //for (int i = 0; i < lines.Length; i++)
-        //{
-        //    if (Random.value > 0.2f)
-        //    {
-        //        int l = (int)Random.Range(0, pools.Length);
-
-        //        if ((!availableEnemies.Contains(l)) && (i != h))
-        //        {
-        //            availableEnemies.Add(l);
-        //            position = lines[i].controlPoints[0];
-        //            obj = pools[l].Activate(position, Quaternion.identity);
-                    
-        //            obj.GetComponent<EnemyMove>().line = lines[i];
-        //            obj.GetComponent<EnemyMove>().MoveByCurve();
-        //            enemyCount++;
-                    
-        //        }
-        //    }
-        //}
+        
     }
 
 

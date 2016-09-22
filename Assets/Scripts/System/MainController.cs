@@ -95,8 +95,15 @@ public class MainController : MonoBehaviour
         }
     }
 
-    public static void LoseGame()
+    public void LoseGame()
     {
+        StartCoroutine(LoseGameCoroutine());
+    }
+
+    IEnumerator LoseGameCoroutine()
+    {
+        SoundManager.soundManager.LoseGame();
+        yield return new WaitForSeconds(5.0f);
         SceneManager.LoadScene(0);
     }
 
