@@ -9,7 +9,9 @@ public class ObjectControl : MonoBehaviour
 
     //float leftPosition;
     //float rightPosition;
+    [HideInInspector]
     public Vector2 leftPosition;
+    [HideInInspector]
     public Vector2 rightPosition;
     bool isMoving;
     bool blueMoveRight;

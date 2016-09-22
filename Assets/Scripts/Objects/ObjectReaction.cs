@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ObjectReaction : MonoBehaviour
 {
-
+    
     Animator anim;
 
     void Start()
@@ -13,8 +13,11 @@ public class ObjectReaction : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if ((gameObject.tag != other.gameObject.tag)&&(other.gameObject.layer!=gameObject.layer))
+        if ((gameObject.tag != other.gameObject.tag)&&(other.gameObject.layer!=gameObject.layer)&&(!ObjectInfo.invincible))
         {
+            //Debug.Log("sdfg");
+            Hp.hpComponent.LoseHp();
+            ObjectInfo.objectInfo.MakeInvincible();
             StartCoroutine(Damage());
         }
     }

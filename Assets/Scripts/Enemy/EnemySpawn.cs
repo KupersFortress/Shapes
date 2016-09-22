@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class EnemySpawn : MonoBehaviour
 {
     public static EnemySpawn enemySpawn;
+    [HideInInspector]
     public int destroyedEnemyCount;
     [SerializeField]
     float spawnDelay;
@@ -12,21 +13,15 @@ public class EnemySpawn : MonoBehaviour
     int enemyCount;
     [SerializeField]
     int maxEnemyCount;
-    public Line[] lines;
+    public CurveComponent[] curves;
     public Pool[] pools;
     bool isSpawning;
-    //public List<int> enemiesOnLine;
-    //[SerializeField]
-    //bool moveByCurve;
-    //int enemyTypeCount;
-
 
     void Start()
     {
         enemySpawn = this;
         destroyedEnemyCount = 0;
         enemyCount = 0;
-        //enemyTypeCount = pools.Length;
         StartCoroutine(Spawn());
         
         isSpawning = true;
@@ -60,85 +55,71 @@ public class EnemySpawn : MonoBehaviour
 
     void GenerateMultipleEnemies()
     {
-        List<int> enemiesOnLine = new List<int>();
-        //List<int> enemiesOnLine = new List<int>();
+
+        List<int> EnemiesAtMoment = new List<int>();
         int j = (int)Random.Range(0, pools.Length);
-        enemiesOnLine.Add(j);
-        //print(enemiesOnLine[0]);
-        int h = (int)Random.Range(0, lines.Length);
-        bool leftPosition= Random.value > 0.5 ?
-                        true : false;
-        Vector3 position = leftPosition ?
-                        lines[h].spawnPositions[0].position : lines[h].spawnPositions[1].position;
-        GameObject obj=(GameObject)pools[j].Activate(position, Quaternion.identity);
+        int h = (int)Random.Range(0, curves.Length);
+        bool firstLine= Random.value > 0.5f ? true :false;
+        Vector3 position = firstLine? curves[h].lines[0].controlPoints[0]:curves[h].lines[1].controlPoints[0];
 
-        
-            obj.GetComponent<EnemyMove>().leftDirection = !leftPosition;
-        
-
-        enemyCount++;
-        if (lines[h].curve != null)
-        {
-            obj.GetComponent<EnemyMove>().mgCurve = lines[h].curve;
-        }
+        GameObject obj = (GameObject)pools[j].Activate(position, Quaternion.identity);
+        obj.GetComponent<EnemyMove>().line = firstLine ? curves[h].lines[0] : curves[h].lines[1];
         obj.GetComponent<EnemyMove>().MoveByCurve();
-        for (int i = 0; i < lines.Length; i++)
+        EnemiesAtMoment.Add(j);
+        enemyCount++;
+
+        for (int i = 0; i < curves.Length; i++)
         {
             if (Random.value > 0.2f)
             {
                 int l = (int)Random.Range(0, pools.Length);
 
-                if (!enemiesOnLine.Contains(l))
-
+                if ((i != h) && (!EnemiesAtMoment.Contains(l)))
                 {
-                    //print(l);
-                    //print(enemiesOnLine.Contains(l));
-                    enemiesOnLine.Add(l);
+                    firstLine = Random.value > 0.5f ? true : false;
+                    position = firstLine ? curves[i].lines[0].controlPoints[0] : 
+                        curves[i].lines[1].controlPoints[0];
+                    EnemiesAtMoment.Add(l);
                     obj = pools[l].Activate(position, Quaternion.identity);
-                    if (i != h)
-                    {
-                        leftPosition = Random.value > 0.5 ? true : false;
-                        position = leftPosition ?
-                            lines[i].spawnPositions[0].position : lines[i].spawnPositions[1].position;
-                        obj.GetComponent<EnemyMove>().leftDirection = !leftPosition;
-                    }
-                    else
-                    {
-                        leftPosition = !leftPosition;
-                        position = leftPosition ?
-                            lines[h].spawnPositions[0].position : lines[h].spawnPositions[1].position;
-                        obj.GetComponent<EnemyMove>().leftDirection = !leftPosition;
-                    }
-                    obj.transform.position = position;
-                    
 
-                    //Debug.Log(enemiesOnLine);
-                    if (lines[i].curve != null)
-                    {
-                        obj.GetComponent<EnemyMove>().mgCurve = lines[i].curve;
-                    }
+                    obj.GetComponent<EnemyMove>().line = firstLine ? curves[i].lines[0] : curves[i].lines[1];
                     obj.GetComponent<EnemyMove>().MoveByCurve();
                     enemyCount++;
+
                 }
             }
         }
+
+        //int j = (int)Random.Range(0, pools.Length);
+        //int h = (int)Random.Range(0, lines.Length);
+        //Vector3 position = lines[h].controlPoints[0];
+
+        //GameObject obj=(GameObject)pools[j].Activate(position, Quaternion.identity);
+        //obj.GetComponent<EnemyMove>().line = lines[h];
+        //obj.GetComponent<EnemyMove>().MoveByCurve();
+
+        //enemyCount++;
+        //for (int i = 0; i < lines.Length; i++)
+        //{
+        //    if (Random.value > 0.2f)
+        //    {
+        //        int l = (int)Random.Range(0, pools.Length);
+
+        //        if ((!availableEnemies.Contains(l)) && (i != h))
+        //        {
+        //            availableEnemies.Add(l);
+        //            position = lines[i].controlPoints[0];
+        //            obj = pools[l].Activate(position, Quaternion.identity);
+                    
+        //            obj.GetComponent<EnemyMove>().line = lines[i];
+        //            obj.GetComponent<EnemyMove>().MoveByCurve();
+        //            enemyCount++;
+                    
+        //        }
+        //    }
+        //}
     }
 
 
 }
-////сделать второй
-//j = (int)Random.Range(0, pools.Length);
-//if (!enemiesOnLine.Contains(j))
-//{
-//    enemiesOnLine.Add(j);
-//    position = leftPosition ?
-//                lines[h].spawnPositions[1].position : lines[h].spawnPositions[0].position;
-//    obj = (GameObject)pools[j].Activate(position, Quaternion.identity);
 
-//    obj.GetComponent<EnemyMove>().leftDirection = leftPosition;
-//    enemyCount++;
-//    if (lines[h].curve != null)
-//    {
-//        obj.GetComponent<EnemyMove>().mgcurves = lines[h].curve;
-//    }
-//}
