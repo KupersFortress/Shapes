@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainController : MonoBehaviour
 {
-
+    public Image progressBar;
     public static MainController mainController;
     public int lvlCount;
     private string currentSceneName;
@@ -16,9 +17,12 @@ public class MainController : MonoBehaviour
     private delegate void UpdateDelegate();
     private UpdateDelegate[] updateDelegates;
 
-   //int currentLevel;
+    private float loadingProgress;
+    //int currentLevel;
 
     //bool testBool = true;
+
+
 
     protected void OnDestroy()
     {
@@ -118,19 +122,26 @@ public class MainController : MonoBehaviour
     private void UpdateScenePreload()
     {
         sceneLoadTask = SceneManager.LoadSceneAsync(nextSceneName);
+        loadingProgress = 0.0f;
+        
         sceneState = SceneState.Load;
     }
 
     // show the loading screen until it's loaded
     private void UpdateSceneLoad()
     {
+
         // done loading?
         if (sceneLoadTask.isDone == true)
         {
             sceneState = SceneState.Unload;
+            progressBar.fillAmount = 0.0f;
         }
         else
         {
+            print(sceneLoadTask.progress);
+            loadingProgress = sceneLoadTask.progress;
+            progressBar.fillAmount = loadingProgress;
             // update scene loading progress
         }
     }
