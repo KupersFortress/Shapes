@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class MainController : MonoBehaviour
 {
     public Image progressBar;
+    public Image loadingImage;
     public static MainController mainController;
     public int lvlCount;
     private string currentSceneName;
@@ -21,8 +22,6 @@ public class MainController : MonoBehaviour
     //int currentLevel;
 
     //bool testBool = true;
-
-
 
     protected void OnDestroy()
     {
@@ -115,6 +114,7 @@ public class MainController : MonoBehaviour
     {
         // run a gc pass
         System.GC.Collect();
+        
         sceneState = SceneState.Preload;
     }
 
@@ -122,6 +122,7 @@ public class MainController : MonoBehaviour
     private void UpdateScenePreload()
     {
         sceneLoadTask = SceneManager.LoadSceneAsync(nextSceneName);
+        loadingImage.gameObject.SetActive(true);
         loadingProgress = 0.0f;
         
         sceneState = SceneState.Load;
@@ -180,6 +181,7 @@ public class MainController : MonoBehaviour
         // currently unused currently but may be used later
         // DON'T do this here
         //System.GC.Collect();
+        loadingImage.gameObject.SetActive(false);
         sceneState = SceneState.Run;
     }
 

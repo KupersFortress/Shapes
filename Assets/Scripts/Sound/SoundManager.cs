@@ -6,6 +6,7 @@ public class SoundManager : MonoBehaviour
     public static SoundManager soundManager;
     public SoundData data;
     AudioSource source;
+    bool lostGame=false;
 
     void Start()
     {
@@ -18,6 +19,10 @@ public class SoundManager : MonoBehaviour
     public void LoseGame()
     {
         source.Stop();
-        source.PlayOneShot(data.defeat);
+        if (!lostGame)
+        {
+            source.PlayOneShot(data.defeat);
+            lostGame = true;
+        }
     }
 }
